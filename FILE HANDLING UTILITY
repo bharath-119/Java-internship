@@ -1,0 +1,209 @@
+import java.io.*;
+import java.util.Scanner;
+
+public class FileHandlingUtility {
+
+    // Method to write data to a file (creates the file if it doesn't exist)
+    public static void writeToFile(String filePath, String content) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            writer.write(content);
+            writer.newLine();
+            System.out.println("Data written successfully to " + filePath);
+        } catch (IOException e) {
+            System.out.println("An error occurred while writing to the file.");
+            e.printStackTrace();
+        }
+    }
+
+    // Method to read data from a file
+    public static void readFromFile(String filePath) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            System.out.println("\nReading content from " + filePath + ":");
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("The file does not exist.");
+        } catch (IOException e) {
+            System.out.println("An error occurred while reading the file.");
+            e.printStackTrace();
+        }
+    }
+
+    // Method to modify content in the file (replaces old text with new text)
+    public static void modifyFile(String filePath, String oldContent, String newContent) {
+        try {
+            File file = new File(filePath);
+            Scanner fileReader = new Scanner(file);
+            StringBuilder contentBuilder = new StringBuilder();
+
+            // Reading the existing content
+            while (fileReader.hasNextLine()) {
+                String line = fileReader.nextLine();
+                contentBuilder.append(line.replace(oldContent, newContent)).append("\n");
+            }
+            fileReader.close();
+
+            // Writing the modified content back to the file
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+            writer.write(contentBuilder.toString());
+            writer.close();
+
+            System.out.println("File modified successfully.");
+        } catch (IOException e) {
+            System.out.println("An error occurred while modifying the file.");
+            e.printStackTrace();
+        }
+    }
+
+    // Main method to demonstrate file operations
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String filePath = "internship_notes.txt";
+
+        while (true) {
+            System.out.println("\nFILE HANDLING UTILITY - CODTECH");
+            System.out.println("1. Write to File");
+            System.out.println("2. Read from File");
+            System.out.println("3. Modify File");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter the content to write: ");
+                    String content = scanner.nextLine();
+                    writeToFile(filePath, content);
+                    break;
+
+                case 2:
+                    readFromFile(filePath);
+                    break;
+
+                case 3:
+                    System.out.print("Enter the text to be replaced: ");
+                    String oldContent = scanner.nextLine();
+                    System.out.print("Enter the new text: ");
+                    String newContent = scanner.nextLine();
+                    modifyFile(filePath, oldContent, newContent);
+                    break;
+
+                case 4:
+                    System.out.println("Exiting File Handling Utility. Goodbye!");
+                    scanner.close();
+                    System.exit(0);
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+}import java.io.*;
+import java.util.Scanner;
+
+public class FileHandlingUtility {
+
+    // Method to write data to a file (creates the file if it doesn't exist)
+    public static void writeToFile(String filePath, String content) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            writer.write(content);
+            writer.newLine();
+            System.out.println("Data written successfully to " + filePath);
+        } catch (IOException e) {
+            System.out.println("An error occurred while writing to the file.");
+            e.printStackTrace();
+        }
+    }
+
+    // Method to read data from a file
+    public static void readFromFile(String filePath) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            System.out.println("\nReading content from " + filePath + ":");
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("The file does not exist.");
+        } catch (IOException e) {
+            System.out.println("An error occurred while reading the file.");
+            e.printStackTrace();
+        }
+    }
+
+    // Method to modify content in the file (replaces old text with new text)
+    public static void modifyFile(String filePath, String oldContent, String newContent) {
+        try {
+            File file = new File(filePath);
+            Scanner fileReader = new Scanner(file);
+            StringBuilder contentBuilder = new StringBuilder();
+
+            // Reading the existing content
+            while (fileReader.hasNextLine()) {
+                String line = fileReader.nextLine();
+                contentBuilder.append(line.replace(oldContent, newContent)).append("\n");
+            }
+            fileReader.close();
+
+            // Writing the modified content back to the file
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+            writer.write(contentBuilder.toString());
+            writer.close();
+
+            System.out.println("File modified successfully.");
+        } catch (IOException e) {
+            System.out.println("An error occurred while modifying the file.");
+            e.printStackTrace();
+        }
+    }
+
+    // Main method to demonstrate file operations
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String filePath = "internship_notes.txt";
+
+        while (true) {
+            System.out.println("\nFILE HANDLING UTILITY - CODTECH");
+            System.out.println("1. Write to File");
+            System.out.println("2. Read from File");
+            System.out.println("3. Modify File");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter the content to write: ");
+                    String content = scanner.nextLine();
+                    writeToFile(filePath, content);
+                    break;
+
+                case 2:
+                    readFromFile(filePath);
+                    break;
+
+                case 3:
+                    System.out.print("Enter the text to be replaced: ");
+                    String oldContent = scanner.nextLine();
+                    System.out.print("Enter the new text: ");
+                    String newContent = scanner.nextLine();
+                    modifyFile(filePath, oldContent, newContent);
+                    break;
+
+                case 4:
+                    System.out.println("Exiting File Handling Utility. Goodbye!");
+                    scanner.close();
+                    System.exit(0);
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+}
